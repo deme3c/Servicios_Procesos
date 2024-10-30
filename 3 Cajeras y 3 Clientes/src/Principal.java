@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class principal {
+public class Principal {
 
 	static Scanner sc = new Scanner(System.in);
 	static Scanner scLine = new Scanner(System.in);
@@ -82,15 +82,15 @@ public class principal {
 		if (tiempoCajera1 >= tiempoCajera2 && tiempoCajera1 >= tiempoCajera3) {
 		    System.out.println("Tiempo invertido en pasar las 3 compras por 3 cajeras en paralelo: "
 		    		+ Math.round(tiempoCajera1) + " segundos");
-		    System.out.println("\nTIMEPO GANADO EN EL SEGUNDO CASO: " + Math.round(cajera1.getTiempoTotal()-tiempoCajera1) + " segundos");
+		    System.out.println("\nTIEMPO GANADO EN EL SEGUNDO CASO: " + Math.round(cajera1.getTiempoTotal()-tiempoCajera1) + " segundos");
 		} else if (tiempoCajera2 >= tiempoCajera1 && tiempoCajera2 >= tiempoCajera3) {
 		    System.out.println("Tiempo invertido en pasar las 3 compras por 3 cajeras en paralelo: "
 		    		+ Math.round(tiempoCajera2) + " segundos");
-		    System.out.println("\nTIMEPO GANADO EN EL SEGUNDO CASO: " + Math.round(cajera1.getTiempoTotal()-tiempoCajera2) + " segundos");
+		    System.out.println("\nTIEMPO GANADO EN EL SEGUNDO CASO: " + Math.round(cajera1.getTiempoTotal()-tiempoCajera2) + " segundos");
 		} else {
 		    System.out.println("Tiempo invertido en pasar las 3 compras por 3 cajeras en paralelo: "
 		    		+ Math.round(tiempoCajera3) + " segundos");
-		    System.out.println("\nTIMEPO GANADO EN EL SEGUNDO CASO: " + Math.round(cajera1.getTiempoTotal()-tiempoCajera3) + " segundos");
+		    System.out.println("\nTIEMPO GANADO EN EL SEGUNDO CASO: " + Math.round(cajera1.getTiempoTotal()-tiempoCajera3) + " segundos");
 		}
 	}
 

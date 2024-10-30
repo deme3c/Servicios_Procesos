@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="Cliente"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="tester.MaquinaSCtester"/>
+    <fullyQualifiedTypeName name="tester.MaquinaTester"/>
+    <fullyQualifiedTypeName name="tester.MaquinaCCtester"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.Semaphore"/>
+</qualifiedTypeNameHistroy>

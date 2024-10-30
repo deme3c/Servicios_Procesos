@@ -7,6 +7,7 @@ public class PrincipalAcidosTester{
 	static int contenedor[] = {0};
 	private static Semaphore mutex = new Semaphore(1);
 	
+
 	public static void main(String[] args) {
 		
 		MaquinaSCtester sc1 = new MaquinaSCtester("Maquina 1", 3, contenedor);
@@ -17,15 +18,17 @@ public class PrincipalAcidosTester{
 		MaquinaCCtester cc2 = new MaquinaCCtester("Maquina 5", 4, contenedor, mutex);
 		MaquinaCCtester cc3 = new MaquinaCCtester("Maquina 6", 5, contenedor, mutex);
 		
-		MaquinaTester tester = new MaquinaTester(contenedor, mutex);
+		MaquinaTester testerSC = new MaquinaTester(contenedor, mutex);
+		MaquinaTester testerCC = new MaquinaTester(contenedor, mutex);
 	
 		
-		//maquinasSinConcurrencia(sc1, sc2, sc3, tester);
+		maquinasSinConcurrencia(sc1, sc2, sc3, testerSC);
 		
-		System.out.println();
+		
+		System.out.println("****---------------------------------****--------------------------------****");
 		contenedor[0] = 0;
 		
-		maquinasConConcurrencia(cc1, cc2, cc3, tester);
+		maquinasConConcurrencia(cc1, cc2, cc3, testerCC);
 		
 	
 		
@@ -55,7 +58,7 @@ public class PrincipalAcidosTester{
 		
 		System.out.println("\nTesteadora parada\n");
 			
-		System.out.println("Total contenedor: " + MaquinaSCtester.getContenedorMaximo());
+		System.out.println("Total contenedor: " + contenedor[0]);
 		System.out.println("Total vertido: " + (sc1.getLitrosVertidos() + sc2.getLitrosVertidos()+sc3.getLitrosVertidos()));
 		System.out.println("Muestras tomadas: " + tester.getMuestrasTomadas());
 		System.out.println("Tiempo: " + (tiempoFin - tiempoInicio) + " milisegundos");

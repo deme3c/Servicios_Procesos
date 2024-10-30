@@ -13,10 +13,18 @@ public class MaquinaCCtester extends Thread {
 
 	private int litrosProducidos;
 	private int litrosVertidos;
-	
-	private static Semaphore mutex;
 
+	private Semaphore mutex;
 
+	public MaquinaCCtester(String id, int maxLitrosProducir, int[] contenedor, Semaphore mutex) {
+		super();
+		this.nombre = id;
+		this.litrosProducidos = 0;
+		this.litrosVertidos = 0;
+		this.maxLitrosPuedeProducir = maxLitrosProducir;
+		this.contenedorActual = contenedor;
+		this.mutex = mutex;
+	}
 
 	public int getMaxLitrosPuedeProducir() {
 		return maxLitrosPuedeProducir;
@@ -70,16 +78,6 @@ public class MaquinaCCtester extends Thread {
 		this.litrosVertidos = litrosVertidos;
 	}
 
-	public MaquinaCCtester(String id, int maxLitrosProducir, int[] contenedor, Semaphore mutex) {
-		super();
-		this.nombre = id;
-		this.litrosProducidos = 0;
-		this.litrosVertidos = 0;
-		this.maxLitrosPuedeProducir = maxLitrosProducir;
-		this.contenedorActual = contenedor;
-		this.mutex = mutex;
-	}
-
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -88,39 +86,37 @@ public class MaquinaCCtester extends Thread {
 		boolean continuar = true;
 		while (continuar) {
 
-			
+			int produccion = r.nextInt(maxLitrosPuedeProducir) + 1;
+			this.litrosProducidos += produccion;
+
 			try {
 				mutex.acquire();
+
+				if (contenedorActual[0] + produccion <= contenedorMaximo) {
+					contenedorActual[0] += produccion;
+					this.litrosVertidos += produccion;
+
+				}
+				else if (contenedorActual[0] + produccion > contenedorMaximo) {
+					int espacioDisponible = contenedorMaximo - contenedorActual[0];
+
+					contenedorActual[0] += espacioDisponible;
+					this.litrosVertidos += espacioDisponible;
+
+					continuar = false;
+				}
+
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 
-			int produccion = r.nextInt(3) + 1;
-
-
-
-			if (contenedorActual[0] + produccion < contenedorMaximo) {
-				contenedorActual[0] += produccion;
-				this.litrosProducidos += produccion;
-				this.litrosVertidos += produccion;
-			} else {
-				int espacioDisponible = contenedorMaximo - contenedorActual[0];
-				this.litrosProducidos += produccion;
-				this.litrosVertidos += espacioDisponible;
-				contenedorActual[0] = contenedorMaximo;
-				continuar = false;
-			}
-
-			
+			mutex.release();
 
 			try {
 				Thread.sleep(produccion);
 			} catch (InterruptedException e) {
 			}
-			
-			mutex.release();
+
 		}
 
 	}
